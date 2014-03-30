@@ -1,6 +1,6 @@
-package com.example.sensor_android;
+package com.example.sensorandroid;
 
-import org.w3c.dom.Text;
+import com.example.sensor_android.R;
 
 import android.app.Activity;
 import android.hardware.Sensor;
@@ -12,8 +12,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager.LayoutParams;
 import android.view.Window;
+import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 public class SensorActivity extends Activity implements SensorEventListener,
 		OnClickListener {
+	
+	private String LOG_TAG = "SensorActivity";
 
 	private SensorManager mSensorManager;
 	private ImageView iv;
@@ -36,7 +38,7 @@ public class SensorActivity extends Activity implements SensorEventListener,
 	private Sensor mSensorHumidity;
 	private Sensor mSensorRotationVector;
 	private Sensor mSensorTemperature;
-	private String LOG_TAG = "SensorActivity";
+	
 	private TextView ambientTemp;
 	private TextView light;
 	private TextView linearAcceleration;

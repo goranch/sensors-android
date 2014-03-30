@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.sensor_android.SensorActivity"
+            android:name="com.example.sensorandroid.SensorActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
