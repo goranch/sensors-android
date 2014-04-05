@@ -91,56 +91,6 @@ public class SensorActivity extends Activity implements SensorEventListener,
 		mSensorRotationVector = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 		mSensorTemperature = mSensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
 	}
-	static int interval;
-	static Timer timer;
-
-	public void timer(){
-		Scanner sc = new Scanner(System.in);
-	    System.out.print("Input seconds => : ");
-	    String secs = sc.nextLine();
-	    int delay = 1000;
-	    int period = 1000;
-	    timer = new Timer();
-	    interval = Integer.parseInt(secs);
-	    System.out.println(secs);
-	    timer.scheduleAtFixedRate(new TimerTask() {
-
-	        public void run() {
-	            
-	        }
-	    }, delay, period);
-	}
-
-	public class ThreadA {
-	    public void main(){
-	        ThreadB b = new ThreadB();
-	        b.start();
-	 
-	        synchronized(b){
-	            try{
-	                System.out.println("Waiting for b to complete...");
-	                b.wait();
-	            }catch(InterruptedException e){
-	                e.printStackTrace();
-	            }
-	 
-	            System.out.println("Total is: " + b.total);
-	        }
-	    }
-	}
-	 
-	class ThreadB extends Thread{
-	    int total;
-	    @Override
-	    public void run(){
-	        synchronized(this){
-	            for(int i=0; i<100 ; i++){
-	                total += i;
-	            }
-	            notify();
-	        }
-	    }
-	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
