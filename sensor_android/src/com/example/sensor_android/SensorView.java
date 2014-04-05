@@ -1,4 +1,4 @@
-package com.example.sensorandroid;
+package com.example.sensor_android;
 
 import android.content.Context;
 import android.graphics.Canvas;

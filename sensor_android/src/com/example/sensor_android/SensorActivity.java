@@ -1,4 +1,4 @@
-package com.example.sensorandroid;
+package com.example.sensor_android;
 
 import java.util.Scanner;
 import java.util.Timer;
