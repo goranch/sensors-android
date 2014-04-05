@@ -30,9 +30,11 @@ public final class R {
         public static final int humidity=0x7f080011;
         public static final int light=0x7f08000c;
         public static final int linear_acceleration=0x7f080010;
+        public static final int mag_field=0x7f08001b;
         public static final int pressure=0x7f080012;
         public static final int rotation_vector=0x7f080015;
         public static final int temperature=0x7f080018;
+        public static final int textView1=0x7f08001c;
         public static final int textView10=0x7f08000f;
         public static final int textView11=0x7f080003;
         public static final int textView12=0x7f080005;
@@ -42,10 +44,10 @@ public final class R {
         public static final int textView18=0x7f080016;
         public static final int textView2=0x7f080001;
         public static final int textView3=0x7f08001a;
-        public static final int textView4=0x7f080006;
-        public static final int textView5=0x7f080007;
-        public static final int textView6=0x7f080008;
-        public static final int textView7=0x7f080009;
+        public static final int textView4=0x7f080007;
+        public static final int textView5=0x7f080008;
+        public static final int textView6=0x7f080009;
+        public static final int textView7=0x7f080006;
         public static final int textView8=0x7f08000a;
         public static final int textView9=0x7f08000e;
         public static final int x_axis=0x7f080004;

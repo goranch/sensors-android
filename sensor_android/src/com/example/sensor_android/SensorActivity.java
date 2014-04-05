@@ -70,7 +70,7 @@ public class SensorActivity extends Activity implements SensorEventListener,
 		temperature = (TextView) findViewById(R.id.temperature);
 		
 		gyro = (TextView) findViewById(R.id.textView11);
-		magnet = (TextView) findViewById(R.id.textView12);
+		magnet = (TextView) findViewById(R.id.mag_field);
 //		orientatation = (TextView) findViewById(R.id.textView13);
 		
 		
@@ -160,7 +160,7 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			gyro.setText(event.values[0] + "");
 			break;
 		case Sensor.TYPE_MAGNETIC_FIELD:
-//			magnet.setText(event.values[0] + "");
+			magnet.setText(event.values[0] + "");
 			break;
 		case Sensor.TYPE_ORIENTATION:
 			orientatation.setText(event.values[0] + "");
