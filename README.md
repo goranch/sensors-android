@@ -1,4 +1,4 @@
 sensors-android
 ===============
 
-Experimenting with android sensors (all contribution is welcomed)
+Experimenting with android sensors (all contribution welcomed)
