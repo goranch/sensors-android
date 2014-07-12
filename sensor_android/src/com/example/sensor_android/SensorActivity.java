@@ -28,6 +28,8 @@ public class SensorActivity extends Activity implements SensorEventListener,
 
 	private SensorManager mSensorManager;
 	private ImageView iv;
+	
+	
 
 	private Button buttonOn, buttonOff;
 	private TextView x, y, z, gyro, magnet, orientatation;
