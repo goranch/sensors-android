@@ -1,15 +1,14 @@
 package com.example.sensor_android;
 
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -21,15 +20,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sensor_android.R;
-
 public class SensorActivity extends Activity implements SensorEventListener,
 		OnClickListener {
+	
+	
 	
 	private String LOG_TAG = "SensorActivity";
 
 	private SensorManager mSensorManager;
 	private ImageView iv;
+	
+	
 
 	private Button buttonOn, buttonOff;
 	private TextView x, y, z, gyro, magnet, orientatation;
@@ -50,6 +51,10 @@ public class SensorActivity extends Activity implements SensorEventListener,
 	private TextView humidity;
 	private TextView rotationVector;
 	private TextView temperature;
+	
+	private float xo;
+	private float yo;
+	private float zo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,31 +127,31 @@ public class SensorActivity extends Activity implements SensorEventListener,
 
 		switch (event.sensor.getType()) {
 		case Sensor.TYPE_AMBIENT_TEMPERATURE:
-			Log.v(LOG_TAG , "AMBIENT_TEMPERATURE" + event.values[0]+"");
+//			Log.v(LOG_TAG , "AMBIENT_TEMPERATURE" + event.values[0]+"");
 			ambientTemp.setText( event.values[0]+"");
 			break;
 		case Sensor.TYPE_LIGHT:
-			Log.v(LOG_TAG , "LIGHT" + event.values[0]+"");
+//			Log.v(LOG_TAG , "LIGHT" + event.values[0]+"");
 			light.setText(event.values[0] + "");
 			break;
 		case Sensor.TYPE_LINEAR_ACCELERATION:
-			Log.v(LOG_TAG , "LINEAR_ACCELERATION" + event.values[0]+"");
+//			Log.v(LOG_TAG , "LINEAR_ACCELERATION" + event.values[0]+"");
 			linearAcceleration.setText(event.values[0] + "");
 			break;
 		case Sensor.TYPE_PRESSURE:
-			Log.v(LOG_TAG , "PRESSURE" + event.values[0]+"");
+//			Log.v(LOG_TAG , "PRESSURE" + event.values[0]+"");
 			pressure.setText(event.values[0] + "");
 			break;
 		case Sensor.TYPE_RELATIVE_HUMIDITY:
-			Log.v(LOG_TAG , "TYPE_RELATIVE_HUMIDITY" + event.values[0]+"");
+//			Log.v(LOG_TAG , "TYPE_RELATIVE_HUMIDITY" + event.values[0]+"");
 			humidity.setText(event.values[0] + "");
 			break;
 		case Sensor.TYPE_ROTATION_VECTOR:
-			Log.v(LOG_TAG , "TYPE_ROTATION_VECTOR" + event.values[0]+"");
+//			Log.v(LOG_TAG , "TYPE_ROTATION_VECTOR" + event.values[0]+"");
 			rotationVector.setText(event.values[0] + "");
 			break;
 		case Sensor.TYPE_TEMPERATURE:
-			Log.v(LOG_TAG , "TYPE_TEMPERATURE" + event.values[0]+"");
+//			Log.v(LOG_TAG , "TYPE_TEMPERATURE" + event.values[0]+"");
 			temperature.setText(event.values[0] + "");
 			break;
 			
@@ -154,6 +159,10 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			x.setText(event.values[0] + "");
 			y.setText(event.values[1] + "");
 			z.setText(event.values[2] + "");
+			
+			xo = event.values[0];
+			yo = event.values[1];
+			zo = event.values[2];
 
 			break;
 		case Sensor.TYPE_GYROSCOPE:
@@ -167,8 +176,8 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			break;
 		case Sensor.TYPE_PROXIMITY:
 			unlockScreen();
-			Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
-					Toast.LENGTH_SHORT).show();
+//			Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
+//					Toast.LENGTH_SHORT).show();
 			break;
 		default:
 			break;
@@ -176,9 +185,9 @@ public class SensorActivity extends Activity implements SensorEventListener,
 
 		System.out.println();
 
-		Log.v("onSensorChanged", " theValue: " + event.sensor.getName());
+//		Log.v("onSensorChanged", " theValue: " + event.sensor.getName());
 
-		Log.v("onSensorChanged", "" + event.values[0]);
+//		Log.v("onSensorChanged", "" + event.values[0]);
 
 		// Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
 		// Toast.LENGTH_SHORT).show();
@@ -191,6 +200,14 @@ public class SensorActivity extends Activity implements SensorEventListener,
 		wind.addFlags(LayoutParams.FLAG_DISMISS_KEYGUARD);
 		wind.addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 		wind.addFlags(LayoutParams.FLAG_TURN_SCREEN_ON);
+		
+		if (Math.abs(xo) < 1 && Math.abs(yo) < 1) {
+			WakeLock screenLock = ((PowerManager)getSystemService(POWER_SERVICE)).newWakeLock(
+				     PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
+				screenLock.acquire();
+		}
+		 
+		 Log.v(LOG_TAG, "should be on");
 
 	}
 
