@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -50,6 +51,10 @@ public class SensorActivity extends Activity implements SensorEventListener,
 	private TextView humidity;
 	private TextView rotationVector;
 	private TextView temperature;
+	
+	private float xo;
+	private float yo;
+	private float zo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +159,10 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			x.setText(event.values[0] + "");
 			y.setText(event.values[1] + "");
 			z.setText(event.values[2] + "");
+			
+			xo = event.values[0];
+			yo = event.values[1];
+			zo = event.values[2];
 
 			break;
 		case Sensor.TYPE_GYROSCOPE:
@@ -167,8 +176,8 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			break;
 		case Sensor.TYPE_PROXIMITY:
 			unlockScreen();
-			Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
-					Toast.LENGTH_SHORT).show();
+//			Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
+//					Toast.LENGTH_SHORT).show();
 			break;
 		default:
 			break;
@@ -176,9 +185,9 @@ public class SensorActivity extends Activity implements SensorEventListener,
 
 		System.out.println();
 
-		Log.v("onSensorChanged", " theValue: " + event.sensor.getName());
+//		Log.v("onSensorChanged", " theValue: " + event.sensor.getName());
 
-		Log.v("onSensorChanged", "" + event.values[0]);
+//		Log.v("onSensorChanged", "" + event.values[0]);
 
 		// Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
 		// Toast.LENGTH_SHORT).show();
@@ -192,9 +201,11 @@ public class SensorActivity extends Activity implements SensorEventListener,
 		wind.addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 		wind.addFlags(LayoutParams.FLAG_TURN_SCREEN_ON);
 		
-		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		 PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
-		 wl.acquire();
+		if (Math.abs(xo) < 1 && Math.abs(yo) < 1) {
+			WakeLock screenLock = ((PowerManager)getSystemService(POWER_SERVICE)).newWakeLock(
+				     PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
+				screenLock.acquire();
+		}
 		 
 		 Log.v(LOG_TAG, "should be on");
 
