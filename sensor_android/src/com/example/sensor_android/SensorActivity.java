@@ -169,6 +169,7 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			unlockScreen();
 			Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
 					Toast.LENGTH_SHORT).show();
+			//sdfasdf
 			break;
 		default:
 			break;
