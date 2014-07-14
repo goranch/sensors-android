@@ -176,8 +176,12 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			break;
 		case Sensor.TYPE_PROXIMITY:
 			unlockScreen();
+
 //			Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
 //					Toast.LENGTH_SHORT).show();
+
+			//sdfasdf
+
 			break;
 		default:
 			break;
