@@ -177,12 +177,14 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			orientatation.setText(event.values[0] + "");
 			break;
 		case Sensor.TYPE_PROXIMITY:
+			
 			unlockScreen();
 
 			// Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
 			// Toast.LENGTH_SHORT).show();
 
-			// sdfasdf
+			//sdfasdf
+			// lkjfkld
 
 			break;
 		default:
