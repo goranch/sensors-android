@@ -185,7 +185,6 @@ public class SensorActivity extends Activity implements SensorEventListener,
 
 			//sdfasdf
 			// lkjfkld
-			//sdflskjdfsldkjf
 
 			break;
 		default:
