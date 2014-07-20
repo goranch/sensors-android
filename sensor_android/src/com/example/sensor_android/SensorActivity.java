@@ -57,8 +57,8 @@ public class SensorActivity extends Activity implements SensorEventListener,
 
 		buttonOn = (Button) findViewById(R.id.button1);
 		buttonOff = (Button) findViewById(R.id.button2);
-		x = (TextView) findViewById(R.id.x_axis);
 		y = (TextView) findViewById(R.id.y_axis);
+		x = (TextView) findViewById(R.id.x_axis);
 		z = (TextView) findViewById(R.id.z_axis);
 		ambientTemp = (TextView) findViewById(R.id.ambient_temperature);
 		light = (TextView) findViewById(R.id.light);
@@ -180,12 +180,6 @@ public class SensorActivity extends Activity implements SensorEventListener,
 			
 			unlockScreen();
 
-			// Toast.makeText(getApplicationContext(), "SensorChanged!!! =)",
-			// Toast.LENGTH_SHORT).show();
-
-			//sdfasdf
-			// lkjfkld
-
 			break;
 		default:
 			break;
@@ -202,21 +196,26 @@ public class SensorActivity extends Activity implements SensorEventListener,
 
 	}
 
+	/**
+	 * Unlock and turn on the screen if the phone is held horizontal on a table. Oterwise do nothing 
+	 */
 	private void unlockScreen() {
-		Window wind;
-		wind = this.getWindow();
-		wind.addFlags(LayoutParams.FLAG_DISMISS_KEYGUARD);
-		wind.addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-		wind.addFlags(LayoutParams.FLAG_TURN_SCREEN_ON);
 
 		if (Math.abs(xo) < 1 && Math.abs(yo) < 1) {
+			
+			Window wind;
+			wind = this.getWindow();
+			wind.addFlags(LayoutParams.FLAG_DISMISS_KEYGUARD);
+			wind.addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			wind.addFlags(LayoutParams.FLAG_TURN_SCREEN_ON);
+			
 			WakeLock screenLock = ((PowerManager) getSystemService(POWER_SERVICE))
 					.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
 							| PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
 			screenLock.acquire();
+			
+			Log.v(LOG_TAG, "Screen should be on");
 		}
-
-		Log.v(LOG_TAG, "should be on");
 
 	}
 
@@ -256,6 +255,10 @@ public class SensorActivity extends Activity implements SensorEventListener,
 		case R.id.button2:
 			System.out.println("unregister sensors");
 			mSensorManager.unregisterListener(this);
+			
+			// keep the proximity sensor on at all times
+			mSensorManager.registerListener(this, mSensorProximity,
+					SensorManager.SENSOR_DELAY_NORMAL);
 			break;
 
 		default:
