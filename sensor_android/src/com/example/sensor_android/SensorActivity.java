@@ -255,10 +255,6 @@ public class SensorActivity extends Activity implements SensorEventListener,
 		case R.id.button2:
 			System.out.println("unregister sensors");
 			mSensorManager.unregisterListener(this);
-			
-			// keep the proximity sensor on at all times
-			mSensorManager.registerListener(this, mSensorProximity,
-					SensorManager.SENSOR_DELAY_NORMAL);
 			break;
 
 		default:
