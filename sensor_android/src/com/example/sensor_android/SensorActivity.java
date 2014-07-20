@@ -120,7 +120,7 @@ public class SensorActivity extends Activity implements SensorEventListener,
 	@Override
 	public void onAccuracyChanged(Sensor arg0, int arg1) {
 		// TODO Auto-generated method stub
-		Log.v("onAccuracyChanged", "arg0:" + arg0 + " arg1:" + arg1);
+		//Log.v("onAccuracyChanged", "arg0:" + arg0 + " arg1:" + arg1);
 	}
 
 	@Override
