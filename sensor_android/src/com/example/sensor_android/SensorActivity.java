@@ -23,6 +23,7 @@ public class SensorActivity extends Activity implements SensorEventListener,
 
 	private String LOG_TAG = "SensorActivity";
 
+
 	private SensorManager mSensorManager;
 	private ImageView iv;
 
